@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RSOD", "RSOD.csproj", "{0954524A-C30C-4630-BF3D-E8A32D83963A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0954524A-C30C-4630-BF3D-E8A32D83963A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0954524A-C30C-4630-BF3D-E8A32D83963A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0954524A-C30C-4630-BF3D-E8A32D83963A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0954524A-C30C-4630-BF3D-E8A32D83963A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {726049FE-810E-42DC-AFB5-B0BEE9C0BDF4}
+	EndGlobalSection
+EndGlobal
