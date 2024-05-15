@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OfficeOpenXml;
 using RSOD.Models;
 
 namespace RSOD.Controllers
@@ -187,6 +188,48 @@ FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
         private bool CollectionExists(int id)
         {
             return _context.Collections.Any(e => e.Id == id);
+        }
+
+        public FileResult GetReport()
+        {
+            // Путь к файлу с шаблоном
+            string path = "/reports/report_template.xlsx";
+            //Путь к файлу с результатом
+            string result = "/reports/report.xlsx";
+            FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + path);
+            FileInfo fr = new FileInfo(_appEnvironment.WebRootPath + result);
+            //будем использовть библитотеку не для коммерческого использования
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            //открываем файл с шаблоном
+            using (ExcelPackage excelPackage = new ExcelPackage(fi))
+            {
+                //устанавливаем поля документа
+                excelPackage.Workbook.Properties.Author = "Мочалин Н.А.";
+                excelPackage.Workbook.Properties.Title = "Список коллекций";
+                excelPackage.Workbook.Properties.Subject = "Коллекции";
+                excelPackage.Workbook.Properties.Created = DateTime.Now;
+                //плучаем лист по имени.
+                ExcelWorksheet worksheet =
+               excelPackage.Workbook.Worksheets["Sheet1"];
+                //получаем списко пользователей и в цикле заполняем лист данными
+                int startLine = 3;
+                List<Collection> Collections = _context.Collections.ToList();
+                foreach (Collection collection in Collections)
+                {
+                    worksheet.Cells[startLine, 1].Value = startLine - 2;
+                    worksheet.Cells[startLine, 2].Value = collection.Id;
+                    worksheet.Cells[startLine, 3].Value = collection.Name;
+                    startLine++;
+                }
+                //созраняем в новое место
+                excelPackage.SaveAs(fr);
+            }
+            // Тип файла - content-type
+            string file_type =
+           "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet";
+            // Имя файла - необязательно
+            string file_name = "report.xlsx";
+            return File(result, file_type, file_name);
         }
     }
 }
