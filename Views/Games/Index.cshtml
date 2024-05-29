@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RSOD.Models.Collection>
+﻿@model IEnumerable<RSOD.Models.Game>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,15 +10,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<p>
-    <a asp-action="GetReport">Get Report</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoCollection)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -26,7 +20,19 @@
                 @Html.DisplayNameFor(model => model.Summary)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetacriticPro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetacriticUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StopGame)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Collection)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedData)
@@ -38,16 +44,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoCollection)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Summary)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetacriticPro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetacriticUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StopGame)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Collection.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedData)

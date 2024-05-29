@@ -10,13 +10,15 @@ public class Game
     [Display(Name = "Описание")]
     public string Summary { get; set; }
     [Display(Name = "Фото")]
-    public string Photo { get; set; }
+    public string? Photo { get; set; }
     [Display(Name = "Оценка на Метакритик от критиков")]
     public int MetacriticPro { get; set; }
     [Display(Name = "Оценка на Метакритик от пользователей")]
     public int MetacriticUser { get; set; }
     [Display(Name = "Оценка на СтопГейм")]
     public string StopGame { get; set; }
+    public int? CollectionId { get; set; }
+    public Collection? Collection {  get; set; }
     [Display(Name = "Дата создания")]
     public DateTime CreatedData { get; set; } = DateTime.Now;
 }

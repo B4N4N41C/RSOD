@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RSOD.Models;
 
@@ -11,9 +12,11 @@ using RSOD.Models;
 namespace RSOD.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240528121443_ddd")]
+    partial class ddd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,6 +57,24 @@ namespace RSOD.Migrations
                     b.ToTable("Collections");
                 });
 
+            modelBuilder.Entity("RSOD.Models.CollectionGame", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("CollectionGames");
+                });
+
             modelBuilder.Entity("RSOD.Models.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -62,7 +83,7 @@ namespace RSOD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CollectionId")
+                    b.Property<int?>("CollectionGameId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedData")
@@ -92,7 +113,7 @@ namespace RSOD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CollectionId");
+                    b.HasIndex("CollectionGameId");
 
                     b.ToTable("Games");
                 });
@@ -164,13 +185,22 @@ namespace RSOD.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RSOD.Models.Game", b =>
+            modelBuilder.Entity("RSOD.Models.CollectionGame", b =>
                 {
                     b.HasOne("RSOD.Models.Collection", "Collection")
-                        .WithMany("Games")
-                        .HasForeignKey("CollectionId");
+                        .WithMany()
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Collection");
+                });
+
+            modelBuilder.Entity("RSOD.Models.Game", b =>
+                {
+                    b.HasOne("RSOD.Models.CollectionGame", null)
+                        .WithMany("Games")
+                        .HasForeignKey("CollectionGameId");
                 });
 
             modelBuilder.Entity("RSOD.Models.UserCollection", b =>
@@ -188,7 +218,7 @@ namespace RSOD.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RSOD.Models.Collection", b =>
+            modelBuilder.Entity("RSOD.Models.CollectionGame", b =>
                 {
                     b.Navigation("Games");
                 });

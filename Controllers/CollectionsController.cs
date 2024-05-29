@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -218,7 +217,7 @@ FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     worksheet.Cells[startLine, 1].Value = startLine - 2;
                     worksheet.Cells[startLine, 2].Value = collection.Id;
-                    worksheet.Cells[startLine, 3].Value = collection.Name;
+                    worksheet.Cells[startLine, 3].Value = collection.Games;
                     startLine++;
                 }
                 //созраняем в новое место

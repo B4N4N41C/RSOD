@@ -1,0 +1,73 @@
+﻿@model RSOD.Models.Game
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Game</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetacriticPro" class="control-label"></label>
+                <input asp-for="MetacriticPro" class="form-control" />
+                <span asp-validation-for="MetacriticPro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetacriticUser" class="control-label"></label>
+                <input asp-for="MetacriticUser" class="form-control" />
+                <span asp-validation-for="MetacriticUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StopGame" class="control-label"></label>
+                <input asp-for="StopGame" class="form-control" />
+                <span asp-validation-for="StopGame" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollectionId" class="control-label"></label>
+                <select asp-for="CollectionId" class ="form-control" asp-items="ViewBag.CollectionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedData" class="control-label"></label>
+                <input asp-for="CreatedData" class="form-control" />
+                <span asp-validation-for="CreatedData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="mt-4">
+                    <input type="file" name="upload" class="form-control" /><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
